@@ -26,3 +26,4 @@ class Solution:
             inorder.append(root.val)
             self.inorderTraversal(root.right, inorder)
 
+ # Inorder Traversal in increasing order
