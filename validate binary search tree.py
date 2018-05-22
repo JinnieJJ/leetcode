@@ -11,26 +11,18 @@ class Solution:
         :type root: TreeNode
         :rtype: bool
         """
-        prev, cur = None, root
-        while cur:
-            if cur.left is None:
-                if prev and prev.val >= cur.val:
-                    return False
-                prev = cur
-                cur = cur.right
-            else:
-                node = cur.left
-                while node.right and node.right != cur:
-                    node = node.right
-
-                if node.right is None:
-                    node.right = cur
-                    cur = cur.left
-                else:
-                    if prev and prev.val >= cur.val:
-                        return False
-                    node.right = None
-                    prev = cur
-                    cur = cur.right
-
+        if not root:
+            return True
+        inorder = []
+        self.inorderTraversal(root, inorder)
+        for i in range(len(inorder)-1):
+            if inorder[i] >= inorder[i+1]:
+                return False
         return True
+    
+    def inorderTraversal(self, root, inorder):
+        if root:
+            self.inorderTraversal(root.left, inorder)
+            inorder.append(root.val)
+            self.inorderTraversal(root.right, inorder)
+
