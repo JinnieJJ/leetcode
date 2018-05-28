@@ -15,3 +15,5 @@ class Solution(object):
         if total >= 0:
             return start
         return -1
+
+    
