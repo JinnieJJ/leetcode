@@ -2,9 +2,11 @@
 ### Tracker
 152-Maximum Product Subarray  
 ### Dichotomy
-153-Find Minimum in Rotated Sorted Array(II)
+153-Find Minimum in Rotated Sorted Array(II), 162-Find Peak Element
 ### Structure
 155-Min Stack
+### List
+160-Intersection of Two Linked List
 ### Recursion  
 Combination Sum, Permutations, Restore IP Addresses, Palindrome Partitioning, Number of Islands(BFS)
 ### Sorting  
