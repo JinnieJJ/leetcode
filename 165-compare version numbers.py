@@ -12,4 +12,4 @@ class Solution(object):
                 v2.append(0)
             else:
                 v1.append(0)
-        return cmp(v1, v2)
+        return cmp(v1, v2) #(v1 > v2) - (v1 < v2)
