@@ -19,3 +19,5 @@ class Solution(object):
                 dp[i][j] = max(min(dp[i+1][j] - dungeon[i][j], dp[i][j+1] - dungeon[i][j]), 1)
         return dp[0][0]
             
+
+        
