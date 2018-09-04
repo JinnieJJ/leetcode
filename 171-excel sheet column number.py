@@ -10,3 +10,5 @@ class Solution(object):
         for i in range(n):
             result += (ord(s[n - 1 - i]) - base) * pow(26, i)
         return result
+
+    
