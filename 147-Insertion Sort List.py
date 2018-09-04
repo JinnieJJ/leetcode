@@ -20,5 +20,7 @@ class Solution(object):
             while cur.next and cur.next.val < head.val:
                 cur = cur.next
             # insert and sort the next element
-            cur.next, cur.next.next, head = head, cur.next, head.next
+            tmp = ListNode(head.val)
+            cur.next, cur.next.next = tmp, cur.next
+            head = head.next
         return dummy.next
