@@ -13,20 +13,6 @@ class Solution(object):
                 wsum -= nums[i-K]
             if i >= K-1:
                 W.append(wsum)
-        
-        left = [0] * len(W)
-        best = 0
-        for i in range(len(W)):
-            if W[i] > W[best]:
-                best = i
-            left[i] = best
-        
-        W = [] #array of sums of windows
-        sum_ = 0
-        for i, x in enumerate(nums):
-            sum_ += x
-            if i >= K: sum_ -= nums[i-K]
-            if i >= K-1: W.append(sum_)
 
         left = [0] * len(W) # track the best left index
         best = 0
@@ -48,4 +34,3 @@ class Solution(object):
             if ans is None or (W[i] + W[j] + W[k] > W[ans[0]] + W[ans[1]] + W[ans[2]]):
                 ans = i, j, k
         return ans
-        
