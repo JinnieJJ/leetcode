@@ -20,3 +20,5 @@ class Solution:
                 result[i] = letters[int(i/n)] + result[i] # [d, e, f] [ad, ae, af, bd, be, bf, cd, ce, cf]
             
         return result
+
+    
