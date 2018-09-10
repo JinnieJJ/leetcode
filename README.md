@@ -20,9 +20,11 @@ HARD: 174-Dungeon Game, HARD: 188-Best Time to Buy and Sell Stock IV, HARD: 689-
 ### Stack
 150-Evaluate Reverse Polish Notation
 ### Recursion 
-HARD: 301-Remove Invalid Parentheses
+HARD: 301-Remove Invalid Parentheses，257-Binary Tree Paths， 543-Diameter of Binary Tree, HARD: 282-Expression Add Operators
 ### String
 HARD: 76-Minimum Window Substring
+### Priority Queue
+HARD: 23-Merge k Sorted Lists
 
 
 ### Recursion  
