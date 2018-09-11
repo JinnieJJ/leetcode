@@ -4,7 +4,7 @@ class Solution(object):
         :type prices: List[int]
         :rtype: int
         """
-        if len(prices) < 2:
+        if prices == []:
             return 0
         min_price = prices[0]
         max_profit = 0
