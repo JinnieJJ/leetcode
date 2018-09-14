@@ -11,14 +11,16 @@ class Solution:
             for j in range(len(board[0])):
                 if self.Recursion(board, word, 0, i, j, visited):
                     return True
-
         return False
         
     def Recursion(self, board, word, cur, i, j, visited):
         if cur == len(word):
             return True
 
-        if i < 0 or i >= len(board) or j < 0 or j >= len(board[0]) or visited[i][j] or board[i][j] != word[cur]:
+        if i < 0 or i >= len(board) or j < 0 or j >= len(board[0]):
+            return False
+        
+        if visited[i][j] or board[i][j] != word[cur]:
             return False
 
         visited[i][j] = True
