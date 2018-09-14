@@ -11,11 +11,11 @@ class Solution:
 
     def Next(self, seq):
         nextseq = ""
-        num = 1
+        count = 1
         for i in range(len(seq)):
-            if i < len(seq)-1 and seq[i] == seq[i+1]:
-                num += 1
-                continue
-            nextseq += str(num)+seq[i]
-            num = 1
+            if i < len(seq) - 1 and seq[i] == seq[i+1]:
+                count += 1
+            else:
+                nextseq += str(count) + seq[i]
+                count = 1
         return nextseq
