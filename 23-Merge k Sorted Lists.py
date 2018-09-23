@@ -24,4 +24,3 @@ class Solution:
             if curr.next: 
                 q.put((curr.next.val, curr.next))
         return dummy.next
-        
