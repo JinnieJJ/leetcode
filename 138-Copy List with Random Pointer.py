@@ -18,11 +18,10 @@ class Solution(object):
         while node:
             visited[node] = RandomListNode(node.label)
             node = node.next
-
-        visited[None] = None
+        
         node = head
         while node:
-            visited[node].next = visited[node.next]
-            visited[node].random = visited[node.random]
+            visited[node].next = visited[node.next] if node.next else None
+            visited[node].random = visited[node.random] if node.random else None
             node = node.next
         return visited[head]
