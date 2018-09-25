@@ -12,11 +12,8 @@ class Solution:
     def Recursion(self, candidates, results, start, solution, target):
         if target == 0:
             results.append(list(solution))
-            # print results
         while start < len(candidates) and candidates[start] <= target:
             solution.append(candidates[start])
             self.Recursion(candidates, results, start, solution, target-candidates[start])
-            # print str(start)+":"
-            # print solution
             solution.pop()
             start += 1
