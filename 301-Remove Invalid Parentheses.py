@@ -35,4 +35,3 @@ class Solution(object):
                 if count < 0:
                     return False
         return count == 0
-        
