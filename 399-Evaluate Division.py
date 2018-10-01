@@ -61,3 +61,50 @@ class Solution(object):
             if return_value != -1:
                 return return_value
         return -1
+
+    
+    
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+class UnionFind(object):
+    def __init__(self, equations):
+        self.parents = {}
+        for e1, e2 in equations:
+            self.parents[e1] = (e1, 1.0)
+            self.parents[e2] = (e2, 1.0)
+    
+    def find(self, var):
+        if var not in self.parents:
+            return (None, None)
+        if var == self.parents[var][0]:
+            return self.parents[var]
+        parent = self.find(self.parents[var][0])
+        self.parents[var] = (parent[0], self.parents[var][1] * parent[1])
+        return self.parents[var]
+    
+    def union(self, var1, var2, val):
+        parent1 = self.find(var1)
+        parent2 = self.find(var2)
+        if parent1[0] != parent2[0]:
+            self.parents[parent1[0]] = (parent2[0], parent2[1] * val/parent1[1])
+
+class Solution(object):
+    def calcEquation(self, equations, values, queries):
+        """
+        :type equations: List[List[str]]
+        :type values: List[float]
+        :type queries: List[List[str]]
+        :rtype: List[float]
+        """
+        u = UnionFind(equations)
+        for var, val in zip(equations, values):
+            u.union(var[0], var[1], val)
+        res = []
+        for q1, q2 in queries:
+            parent1 = u.find(q1)
+            parent2 = u.find(q2)
+            if not parent1[0] or not parent2[0] or parent1[0] != parent2[0]:
+                res.append(-1.0)
+            else:
+                res.append(parent1[1] / parent2[1])
+        return res
