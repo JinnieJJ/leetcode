@@ -1,56 +1,62 @@
-class NumArray(object):
+class NumMatrix(object):
 
-    def __init__(self, nums):
+    def __init__(self, matrix):
         """
-        :type nums: List[int]
+        :type matrix: List[List[int]]
         """
-        if not nums:
+        if not matrix or not matrix[0]:
             return
-        self.nums = nums
-        self.bit = [0] * (len(nums) + 1)
-        for i in range(1, len(self.bit)):
-            self.bit[i] = nums[i-1] + self.bit[i-1]
+        self.bit = [[0 for _ in range(len(matrix[0]) + 1)] for _ in range(len(matrix) + 1)]
+        self.matrix = [[0 for _ in range(len(matrix[0]))] for _ in range(len(matrix))]
+        for i in range(len(matrix)):
+            for j in range(len(matrix[0])):
+                self.update(i, j, matrix[i][j])
         
-        for i in range(len(self.bit)-1, 0, -1):
-            last_i = i - (i & -i)
-            self.bit[i] -= self.bit[last_i]
-
-
-    def update(self, i, val):
+    def update(self, row, col, val):
         """
-        :type i: int
+        :type row: int
+        :type col: int
         :type val: int
         :rtype: void
         """
-        if val - self.nums[i]:
-            self.add(i, val - self.nums[i])
-            self.nums[i] = val
-            
-    def add(self, i, val):
-        i += 1
-        while i <= len(self.nums):
-            self.bit[i] += val
+        adjust = val - self.matrix[row][col]
+        self.matrix[row][col] = val
+        row += 1
+        col += 1
+        i = row
+        while i <= len(self.matrix):
+            j = col
+            while j <= len(self.matrix[0]):
+                self.bit[i][j] += adjust
+                j += (j & -j)
             i += (i & -i)
 
-    def sumRange(self, i, j):
+
+    def sumRegion(self, row1, col1, row2, col2):
         """
-        :type i: int
-        :type j: int
+        :type row1: int
+        :type col1: int
+        :type row2: int
+        :type col2: int
         :rtype: int
         """
-        return self.sum(j) - self.sum(i-1)
-    
-    def sum(self, i):
-        i += 1
-        ret = 0
-        while i > 0:
-            ret += self.bit[i]
-            i -= (i & -i)
-        return ret
+        return  self.sum(row2, col2) - self.sum(row2, col1-1) - self.sum(row1-1, col2) + self.sum(row1-1, col1-1)
         
+    def sum(self, row, col):
+        row += 1
+        col += 1
+        ret = 0
+        i =  row
+        while i > 0:
+            j = col
+            while j > 0:
+                ret += self.bit[i][j]
+                j -= (j & -j)
+            i -= (i &  -i)
+        return ret
 
 
-# Your NumArray object will be instantiated and called as such:
-# obj = NumArray(nums)
-# obj.update(i,val)
-# param_2 = obj.sumRange(i,j)
+# Your NumMatrix object will be instantiated and called as such:
+# obj = NumMatrix(matrix)
+# obj.update(row,col,val)
+# param_2 = obj.sumRegion(row1,col1,row2,col2)
