@@ -12,3 +12,5 @@ class Solution(object):
                 dict[stack.pop()] = n
             stack.append(n)
         return [dict.get(n, -1) for n in findNums]
+    
+    
