@@ -17,7 +17,7 @@ class Solution(object):
         min_heap = [(0, src, K+1)]
         while min_heap:
             result, c, k = heapq.heappop(min_heap)
-            if https://leetcode.com/submissions/detail/177642651/k < 0 or best[c][k] < result:
+            if k < 0 or best[c][k] < result:
                 continue
             if c == dst:
                 return result
