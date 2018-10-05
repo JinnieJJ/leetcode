@@ -11,37 +11,29 @@ class Solution(object):
         :type root: TreeNode
         :rtype: int
         """
-        def helper(root, cur_height, max_height):
-            # in this case, now we are already in the bottom level
-            # return 1 if this is a leaf
-            if cur_height == max_height:
-                if root is None:
-                    return 0
-                else:
-                    return 1
-										
-            # right most child in the bottom level of the left child happens to be the middle point
-            tmp = root.left
-            tmp_height = cur_height + 1
-            while tmp_height < max_height:
-                tmp = tmp.right
-                tmp_height += 1
-            if tmp is None:
-                # if middle point is not leaf, looking at the left part, which means recursively process the left child
-                return helper(root.left, cur_height + 1, max_height)
-            else:
-                # if middle point is a leaf, looking at the left part, which means recursively process the left child
-                # and every thing in the left part are leaves, so don't forget this part
-                return pow(2, max_height - cur_height - 1) + helper(root.right, cur_height + 1, max_height)
-        
-        
-        if root is None:
+        if not root:
             return 0
-        height = 0
+        
+        leftheight = 0
         tmp = root
-        # Go to the left most child in bottom level, to count the height of this tree
-        while tmp.left is not None:
+        while tmp.left:
+            leftheight += 1
             tmp = tmp.left
-            height += 1
-        # second term represents are the node above the bottom level
-        return helper(root, 0, height) + pow(2, height) - 1
+        
+        rightheight = 0
+        tmp = root
+        while tmp.right:
+            rightheight += 1
+            tmp = tmp.right
+        
+        if leftheight == rightheight:
+            return (1 << (leftheight+1)) - 1
+        
+        return 1 + self.countNodes(root.left) + self.countNodes(root.right)
+        
+    
+        
+    
+    # 算height
+    # 如果右边的height = h-1 那么就是2**h+右边的recursion
+    # 如果右边的height = h-2 那么就是左边的recursion+2**(h-1)
