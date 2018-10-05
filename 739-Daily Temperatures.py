@@ -4,16 +4,11 @@ class Solution(object):
         :type temperatures: List[int]
         :rtype: List[int]
         """
-        minIdx = collections.defaultdict(int)
-        ans = []
-        size = len(temperatures)
-        for x in range(size - 1, -1, -1):
-            n = temperatures[x]
-            minIdx[n] = x
-            z = 0
-            for y in range(n + 1, 101):
-                if minIdx[y] and (minIdx[y] < z or not z):
-                    z = minIdx[y]
-            ans.append(z - x if z else 0)
-        return ans[::-1]
-        
+        result = [0] * len(temperatures)
+        stk = []
+        for i in xrange(len(temperatures)):
+            while stk and temperatures[stk[-1]] < temperatures[i]:
+                idx = stk.pop()
+                result[idx] = i-idx
+            stk.append(i)
+        return result
