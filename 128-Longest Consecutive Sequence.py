@@ -4,6 +4,8 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
+        if not nums:
+            return 0
         dict = {x: False for x in nums} # False means not visited
         maxLen = -1
         for i in dict:
