@@ -28,3 +28,5 @@ class Solution(object):
                 else:
                     break
         return i
+
+    
