@@ -16,3 +16,5 @@ class Solution(object):
             if i >= k - 1:
                 ans.append(nums[q[0]])
         return ans
+
+    
