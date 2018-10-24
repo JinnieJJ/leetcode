@@ -4,12 +4,12 @@ class Solution(object):
         :type nums: List[int]
         :rtype: bool
         """
-        minimum, a, b = float('inf'), float('inf'), float('inf')
+        first = second = float('inf')
         for n in nums:
-            if minimum >= n:
-                minimum = n
-            elif b >= n:
-                a, b = minimum, n
+            if n <= first:
+                first = n
+            elif n <= second:
+                second = n
             else:
-                return True
+                 return True
         return False
