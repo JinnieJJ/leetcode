@@ -22,3 +22,5 @@ class Solution(object):
             else:
                 alpha[level] += c
         return alpha[1]
+
+    
