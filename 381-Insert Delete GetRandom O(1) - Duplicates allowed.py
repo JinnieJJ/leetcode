@@ -25,6 +25,7 @@ class RandomizedCollection(object):
         """
         if self.idxes[val]:
             out, ins = self.idxes[val].pop(), self.vals[-1]
+            # change positions of the last element and the element to be removed
             self.vals[out] = ins
             if self.idxes[ins]:
                 self.idxes[ins].add(out)
