@@ -6,30 +6,29 @@ class Solution(object):
         """
         stack = []
         num = 0
-        sign = '+'  # default
-        s += '+'  # add a char to force it processing the last number
+        lastchar = '+'
+        s += '+'
         for char in s:
             if ord('0') <= ord(char) <= ord('9'):  # digit
                 num = num * 10 + ord(char) - ord('0')
-            else:  # finish scanning a number
+            
+            else:
                 if char != ' ':
-                    if sign == '+':  # last sign
+                    if lastchar == '+':  # last sign
                         stack.append(num)
-                    elif sign == '-':
+                    elif lastchar == '-':
                         stack.append(-num)
-                    elif sign == '*':
+                    elif lastchar == '*':
                         last = stack.pop()
                         stack.append(last*num)
-                    elif sign == '/':
+                    elif lastchar == '/':
                         last = stack.pop()
                         if last < 0:
                             res = -(-last//num)
                         else:
                             res = last//num
                         stack.append(res)
-
-                    # reset
-                    sign = char
+                    
+                    lastchar = char
                     num = 0
-
         return sum(stack)
