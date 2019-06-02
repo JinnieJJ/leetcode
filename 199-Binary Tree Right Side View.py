@@ -12,15 +12,17 @@ class Solution(object):
         :rtype: List[int]
         """
         result = []
-        self.DFS(root, 1, result)
+        if not root:
+            return result
+        
+        stack = [(root, 1)]
+        while stack:
+            node, depth = stack.pop()
+            if len(result) < depth:
+                result.append(node.val)
+            if node.left:
+                stack.append((node.left, depth+1))
+            if node.right:
+                stack.append((node.right, depth+1))
+        
         return result
-
-    def DFS(self, node, depth, result):
-        if not node:
-            return
-
-        if depth > len(result):
-            result.append(node.val)
-
-        self.DFS(node.right, depth+1, result)
-        self.DFS(node.left, depth+1, result)
