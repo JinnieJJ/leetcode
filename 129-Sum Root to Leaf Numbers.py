@@ -11,13 +11,13 @@ class Solution(object):
         :type root: TreeNode
         :rtype: int
         """
-        return self.Recursion(root, 0)
-
-    def Recursion(self, root, s):
-        if root is None:
+        return self.recursionHelper(root, 0)
+    
+    def recursionHelper(self, root, s):
+        if not root:
             return 0
         
-        if root.left is None and root.right is None:
-            return s * 10 + root.val
-
-        return self.Recursion(root.left, s * 10 + root.val) + self.Recursion(root.right, s * 10 + root.val)
+        if not root.left and not root.right:
+            return s*10 + root.val
+        
+        return self.recursionHelper(root.left, s*10+root.val) + self.recursionHelper(root.right, s*10+root.val)
