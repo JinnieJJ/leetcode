@@ -9,7 +9,6 @@ class Solution(object):
         ans = []
         for i in range(len(nums)):
             while q and nums[q[-1]] <= nums[i]:
-                # q has the largest number at the end
                 q.pop()
             q.append(i)
             if q[0] == i - k:
