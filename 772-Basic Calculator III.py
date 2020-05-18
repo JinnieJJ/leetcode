@@ -1,44 +1,40 @@
 class Solution:
-    def calculate(self, s):
-        """
-        :type s: str
-        :rtype: int
-        """
-        operands = []
-        operators = []
-        number = ""
+    def calculate(self, s: str) -> int:
+        sign = "+"
+        curNum = 0
+        i = 0
+        stack = []
         
-        for i in reversed(range(len(s))):
-            if s[i].isdigit():
-                number += s[i]
-                if i == 0 or not s[i-1].isdigit():
-                    operands.append(int(number[::-1]))
-                    number = ""
-            elif s[i] == ')' or s[i] ==  '*' or s[i] == '/':
-                operators.append(s[i])
-            elif s[i]  == '+' or s[i] == '-':
-                while operators and (operators[-1] == '*' or operators[-1] ==  '/'):
-                    self.compute(operands, operators)
-                operators.append(s[i])
-            elif s[i] == '(':
-                while operators[-1] != ')':
-                    self.compute(operands, operators)
-                operators.pop()
-                
-        while operators:
-            self.compute(operands, operators)
+        def calculate(oper, num):
+            if sign == '+':
+                stack.append(num)
+            elif sign == '-':
+                stack.append(-1 * num)
+            elif sign == '*':
+                stack.append(stack.pop() * num)
+            elif sign == '/':
+                stack.append(int(stack.pop() / num))
             
-        return operands[-1]
-    
-    def compute(self, operands, operators):
-        left, right = operands.pop(), operands.pop()
-        op = operators.pop()
-        
-        if op  == '+':
-            operands.append(left + right)
-        elif op == '-':
-            operands.append(left - right)
-        elif op == '*':
-            operands.append(left * right)
-        elif op == '/':
-            operands.append(left // right)
+        while i < len(s):
+            if s[i].isdigit():
+                curNum = curNum * 10 + int(s[i])
+            elif s[i] == '(':
+                stack.append(sign)
+                stack.append(s[i])
+                curNum, sign = 0, "+"
+
+            if s[i] in "+-*/)":
+                calculate(sign, curNum)
+                sign = s[i] if s[i] in '+-*/' else sign
+                curNum = 0 
+                
+                if s[i] == ')':
+                    curNum = 0
+                    while stack[-1] != '(':
+                        curNum += stack.pop()
+                    stack.pop()  # '('
+                    sign = stack.pop()
+            i += 1
+            
+        calculate(sign, curNum)
+        return sum(stack)
