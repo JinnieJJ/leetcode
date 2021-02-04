@@ -27,17 +27,6 @@ HARD: 76-Minimum Window Substring
 HARD: 23-Merge k Sorted Lists
 ### Graph
 HARD: 685-Redundant Connection II(Union Find)
-
-## FAQ:
-```bash
-EXCEPTION: (PhutilAggregateException) Some linters failed: PhutilMissingSymbolException: 
-Failed to load class or interface "SimpleXMLElement".
-```
-By running `git submodule update --init --recursive --remote`, clang-format-linter has been updated to the newest version, which is not supported currently. We need to revert clang-format-linter to the previous version and run `dpkg-buildpackage -us -uc -b` to build the package.
-  
-To test if clang-format-linter works, a cpp-related change is required and then run `arc lint` or `arc diff`.
-
-
 ### Recursion  
 Combination Sum, Permutations, Restore IP Addresses, Palindrome Partitioning
 #### Dynamic Programming  
